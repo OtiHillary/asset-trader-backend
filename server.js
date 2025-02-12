@@ -10,14 +10,14 @@ app.get("/", (req, res) => {
 
 app.post('/login', (req, res) =>{
   try {
-    const { username, password } = req.body
+    const { email, password } = req.body
     //check for user in db here
 
-    if ( username /*username found in db*/ ) {
+    if ( email /*email found in db*/ ) {
       if (/*Hash.password == db.passwordHash*/ password ) {
-        res.status(200).json({ message : "logged in successful" })        
+        res.status(200).json({ message : "logged in successful", role: 'admin/user' })        
       } else {
-        res.status(400).json({ message : "incorrect username or password" })        
+        res.status(400).json({ message : "incorrect email or password" })        
       }
     } else {
       res.status(404).json({ message : "user does not exist" })        
