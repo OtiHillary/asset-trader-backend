@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", routers.AuthRouter);
-app.use("/details", routers.DetailRouter);
+app.use("/trades", routers.TradeRouter);
 
 
 export default app;

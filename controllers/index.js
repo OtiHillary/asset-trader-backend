@@ -1,2 +1,2 @@
 export { Login, Signup } from './authController.js'
-export { Details } from './detailsController.js'
+export { sendTrade, getTrades, getAllTrades } from './tradeController.js'
