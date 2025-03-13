@@ -1,4 +1,11 @@
-import * as supabase from "../supabase/index.js";
+// import * as supabase from "../supabase/index.js";
+
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const supabase = createClient(process.env.URL, process.env.KEY);
 
 const Login = async (req, res) => {
   const { email, password } = req.body;
