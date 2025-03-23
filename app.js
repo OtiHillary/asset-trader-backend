@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
 
 app.use("/auth", routers.AuthRouter);
 app.use("/trades", routers.TradeRouter);
+app.use("/rates", routers.RatesRouter);
+app.use("/assets", routers.AssetsRouter);
 
 
 export default app;

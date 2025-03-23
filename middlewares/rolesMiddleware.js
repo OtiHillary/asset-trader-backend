@@ -1,13 +1,7 @@
-// import * as supabase from "../supabase/index.js";
-import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-dotenv.config();
-
-const supabase = createClient(process.env.URL, process.env.KEY);
+import { supabase } from "../supabase/index.js";
 
 const rolesRequired = async (req, res, role, next) => {
   try {
-    // Get the token from Authorization header
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
@@ -49,6 +43,5 @@ const rolesRequired = async (req, res, role, next) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 export { rolesRequired };
