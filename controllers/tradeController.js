@@ -80,5 +80,4 @@ const completeTrade = async (req, res) => {
   }
 }
 
-
 export { sendTrade, getTrades, getAllTrades, completeTrade }
