@@ -4,4 +4,4 @@ const RequestMiddleware = (req, res, next) => {
   next()
 }
 
-export default RequestMiddleware;
+export {RequestMiddleware};
