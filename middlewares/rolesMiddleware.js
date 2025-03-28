@@ -16,9 +16,12 @@ async function checkRole (req, res, role) {
 
   const userId = user.id; // UUID from Supabase Auth
 
-  if ( role == "all" ) next();
+  if ( role == "all" ) {
+    return {
+      success: true
+    }
+  };
 
-  // Query user_roles table to get the user's role
   const { data: userRoleData, error: roleError } = await supabase
     .from("user_roles")
     .select("role")
@@ -30,19 +33,25 @@ async function checkRole (req, res, role) {
   }
 
   const userRole = userRoleData.role;
+  console.log(`the user with this role is an: ${userRole}`);
 
   // Check if user role matches the required role
   if (userRole !== role) {
+    console.log('message: "Forbidden - Insufficient role');
     return res.status(403).json({ message: "Forbidden - Insufficient role" });
   }
+
   req.user = user;
+  return { success: true };
 }
 
 const rolesRequired = (role) => {
-  return ( req, res, next ) => {
+  return async ( req, res, next ) => {
     try {
-      checkRole(req, res, role)
-      next();
+      let result = await checkRole(req, res, role)
+      if (result?.success) {
+        next();        
+      }
     } catch (error) {
       console.error(error);
     }

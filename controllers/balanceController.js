@@ -8,7 +8,7 @@ const withdrawToken = async (req, res) => {
             return res.status(400).json({ error: "User ID is required" });
         }
 
-        console.log("adding balance for userId:", userId);
+        console.log(`withdraw amount ${amount}`);
 
         const { data, error } = await supabase
             .from("token_wallet")
