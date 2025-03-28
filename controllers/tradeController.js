@@ -2,7 +2,7 @@ import { supabase } from "../supabase/index.js";
 
 const sendTrade = async (req, res) => {
   try {
-    const { card_name, card_code, userId } = req.body;
+    const { card_name, card_code, amount, userId } = req.body;
     console.log("Request Body:", req.body); // ✅ Debugging: Log body
     // console.log("Uploaded File:", req.file); // ✅ Debugging: Log file
 

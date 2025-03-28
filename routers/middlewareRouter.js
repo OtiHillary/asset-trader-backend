@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { RequestMiddleware } from '../middlewares/index.js';
+import { RequestMiddleware, rolesRequired } from '../middlewares/index.js';
 
 const MiddlewareRouter = express()
 MiddlewareRouter.use(RequestMiddleware)

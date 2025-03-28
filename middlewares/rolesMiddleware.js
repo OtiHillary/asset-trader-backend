@@ -31,24 +31,23 @@ async function checkRole (req, res, role) {
 
   const userRole = userRoleData.role;
 
-
   // Check if user role matches the required role
   if (userRole !== role) {
     return res.status(403).json({ message: "Forbidden - Insufficient role" });
   }
-
+  req.user = user;
 }
 
-const rolesRequired = (req, res, role, next) => {
-  try {
-    checkRole(req, res, role)
-    // Attach user data to the request and proceed
-    req.user = user;
-    next();
-
-  } catch (err) {
-    console.error(err);
+const rolesRequired = (role) => {
+  return ( req, res, next ) => {
+    try {
+      checkRole(req, res, role)
+      next();
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
+
 
 export { rolesRequired };
