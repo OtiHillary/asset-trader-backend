@@ -2,6 +2,7 @@ import { supabase } from "../supabase/index.js";
 
 async function checkRole (req, res, role) {
   const token = req.headers.authorization?.split(" ")[1];
+  // console.log(token);
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized - No token provided" });
@@ -9,6 +10,8 @@ async function checkRole (req, res, role) {
 
   // Decode token using Supabase
   const { data: { user }, error } = await supabase.auth.getUser(token);
+
+  console.log(user);
 
   if (error || !user) {
     return res.status(401).json({ message: "Unauthorized - Invalid token" });
@@ -27,6 +30,8 @@ async function checkRole (req, res, role) {
     .select("role")
     .eq("user_id", userId)
     .single();
+
+  console.log("Query result:", userRoleData, "Error:", roleError)
 
   if (roleError || !userRoleData) {
     return res.status(403).json({ message: "Forbidden - Role not found" });

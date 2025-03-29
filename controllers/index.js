@@ -1,4 +1,4 @@
-export { Login, Signup } from './authController.js'
+export { Login, Signup, EditAccount, GetBankName } from './authController.js'
 export { sendTrade, getTrades, getAllTrades } from './tradeController.js'
 export { setBulkRates, setRate, getAllRates } from './ratesController.js'
 export { createAsset, getCryptoBalance, getTokenBalance, sendFromCrypto } from './assetController.js'

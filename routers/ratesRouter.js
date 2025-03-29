@@ -5,7 +5,7 @@ import { rolesRequired } from '../middlewares/rolesMiddleware.js';
 const RatesRouter = express()
 
 RatesRouter.post('/set-rate', rolesRequired('admin'), controllers.setRate)
-RatesRouter.get('/get-rates', rolesRequired('all'), controllers.getAllRates)
+RatesRouter.post('/get-rates', rolesRequired('all'), controllers.getAllRates)
 RatesRouter.post('/set-bulk-rates', rolesRequired('admin'), controllers.setBulkRates)
 
 export default RatesRouter;

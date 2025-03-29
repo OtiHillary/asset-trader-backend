@@ -11,5 +11,6 @@ AuthRouter.get('/user', (req, res, next) => {
 
 AuthRouter.post('/login', controller.Login)
 AuthRouter.post('/signup', controller.Signup)
+AuthRouter.post('/get-details', controller.GetBankName)
 
 export default AuthRouter
