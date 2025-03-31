@@ -31,13 +31,12 @@ const Signup = async (req, res) => {
   res.status(201).json({ message: 'Signup successful', user: data });
 }
 
-async function getBanks() {
+async function getBanks(req, res) {
   try {
     const response = await axios.get("https://api.paystack.co/bank", {
       headers: { Authorization: `Bearer ${PSTACK_KEY}` },
     });
-    // console.log(response);
-    return response.data.data;
+    res.status(200).json(response.data.data);
   } catch (error) {
     console.error("Error fetching banks:", error);
   }
@@ -46,18 +45,15 @@ async function getBanks() {
 async function GetBankName(req, res) {
   const { accountNumber } = req.body;
   try {
-    const banks = await getBanks();
-    for (const bank of banks) {
-      const response = await axios.get(
-        `https://api.paystack.co/bank/resolve?account_number=${accountNumber}&bank_code=${bank.code}`,
-        { headers: { Authorization: `Bearer ${PSTACK_KEY}` } }
-      );
-        // console.log(response);
+    const response = await axios.get(
+      `https://api.paystack.co/bank/resolve?account_number=${accountNumber}&bank_code=${bank.code}`,
+      { headers: { Authorization: `Bearer ${PSTACK_KEY}` } }
+    );
 
-      if (response.data.status) {
-        res.status(200).json({ bankName: bank.name, accountName: response.data.data.account_name }) ;
-      }
+    if (response.data.status) {
+      res.status(200).json({ bankName: bank.name, accountName: response.data.data.account_name }) ;
     }
+
   } catch (error) {
     console.error("Error resolving account:", error );
   }
@@ -80,4 +76,4 @@ const EditAccount = async (req, res) => {
   res.status(201).json({ message: 'Edit successful', user: data });
 }
 
-export { Login, Signup, EditAccount, GetBankName }
+export { Login, Signup, EditAccount, GetBankName, getBanks }
